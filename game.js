@@ -1,6 +1,10 @@
 const cards = document.getElementById('cards');
 const startGame = document.getElementById("startGame");
 
+let firstChoosedCard;
+let openPairs = 0;
+let count = 0;
+
 const images = [
     'Chrysanthemum',
     'Desert',
@@ -28,6 +32,7 @@ startGame.onclick = function() {
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild);
     }
+    openPairs = 0;
 
     let indexes = images.map(function(val, index) {
         return index;
@@ -49,8 +54,46 @@ startGame.onclick = function() {
 cards.onclick = function(e) {
     e.preventDefault();
 
+    if (count == 2)
+        return;
+
     let element = e.target;
+    if (element.getAttribute('data-status') == 'found')
+        return;
+    
     let number = element.getAttribute('data-id');
     const imageName = images[number];
-    element.setAttribute('src', 'images/' + imageName + '.jpg');    
+    element.setAttribute('src', 'images/' + imageName + '.jpg');  
+    count++;
+
+    
+    if (firstChoosedCard) {
+            if (firstChoosedCard == element) {
+                count--;
+                return;
+            }
+
+            setTimeout(function() {
+                if (firstChoosedCard.getAttribute('data-id') == number) {
+                    element.setAttribute('data-status', 'found');
+                    firstChoosedCard.setAttribute('data-status', 'found');
+
+                    openPairs++;
+                    console.log(openPairs, images.length);
+                    if (openPairs == images.length)
+                        console.log('Win');
+                }
+                else {
+                    const imageName = images[0];
+                    element.setAttribute('src', 'images/' + imageName + '.jpg');
+                    firstChoosedCard.setAttribute('src', 'images/' + imageName + '.jpg');
+                }
+                firstChoosedCard = undefined;
+                count = 0;
+            }, 1000);
+    }
+    else {
+        firstChoosedCard = element;
+    }
+
 }
