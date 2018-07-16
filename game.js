@@ -1,5 +1,8 @@
 const cards = document.getElementById('cards');
 const startGame = document.getElementById("startGame");
+const restartGame = document.getElementById("restart");
+const closemodal = document.getElementById("closemodal");
+const modal = document.getElementById("gameover");
 
 let firstChoosedCard;
 let openPairs = 0;
@@ -27,7 +30,7 @@ function shuffle(array) {
     }
 }
 
-startGame.onclick = function() {
+function startNewGame() {
     //delete prevous cards
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild);
@@ -50,6 +53,14 @@ startGame.onclick = function() {
         cards.appendChild(newCard);
     });
 }
+
+function restart() {
+    modal.style.display = "none";
+    startNewGame();
+}
+
+startGame.onclick = startNewGame;
+restartGame.onclick = restart;
 
 cards.onclick = function(e) {
     e.preventDefault();
@@ -80,8 +91,10 @@ cards.onclick = function(e) {
 
                     openPairs++;
                     console.log(openPairs, images.length);
-                    if (openPairs == images.length)
+                    if (openPairs == images.length) {
+                        modal.style.display = "block";
                         console.log('Win');
+                    }
                 }
                 else {
                     const imageName = images[0];
@@ -96,4 +109,8 @@ cards.onclick = function(e) {
         firstChoosedCard = element;
     }
 
+}
+
+closemodal.onclick = function() {
+    modal.style.display = "none";
 }
