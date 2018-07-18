@@ -8,6 +8,7 @@ let firstChoosedCard;
 let openPairs = 0;
 let count = 0;
 
+const backgroundImage = 'background';
 const images = [
     'Chrysanthemum',
     'Desert',
@@ -45,11 +46,13 @@ function startNewGame() {
     console.log(indexes);
 
     indexes.forEach(function(index) {
-        let newCard = document.createElement('img');
-        const imageName = images[0];
-        newCard.setAttribute('src', 'images/' + imageName + '.jpg');
+        let newCard = document.createElement('div');
+        let newCardContent = document.createElement('img');
+        //const imageName = images[0];
+        newCardContent.setAttribute('src', 'images/' + backgroundImage + '.jpg');
         newCard.setAttribute('class', 'card');
-        newCard.setAttribute('data-id', index);
+        newCardContent.setAttribute('data-id', index);
+        newCard.appendChild(newCardContent);
         cards.appendChild(newCard);
     });
 }
@@ -97,9 +100,9 @@ cards.onclick = function(e) {
                     }
                 }
                 else {
-                    const imageName = images[0];
-                    element.setAttribute('src', 'images/' + imageName + '.jpg');
-                    firstChoosedCard.setAttribute('src', 'images/' + imageName + '.jpg');
+                    //const imageName = images[0];
+                    element.setAttribute('src', 'images/' + backgroundImage + '.jpg');
+                    firstChoosedCard.setAttribute('src', 'images/' + backgroundImage + '.jpg');
                 }
                 firstChoosedCard = undefined;
                 count = 0;

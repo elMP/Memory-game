@@ -1,27 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 20px;
+}
+.container{
+    background-image: linear-gradient(white, gray, black);
     min-height: 100vh;
 }
 header {
     text-align: center;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
-#cards {
-    min-height: auto;
+
+header h1 {
+    font-size: 42px;
+}
+
+header button {
+    font-size: 20px;
+    padding: 5px;
+    background-image: linear-gradient(white, gray);
+    outline: black 1px solid;
+    margin: 10px 0;
+}
+
+#cards {    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
-    background: gray;
-    padding: 2%;
-    padding-bottom: 0;
+    padding: 2%;   
 }
 
 .card {
     width: 23%;
-    margin-bottom: 2%;
-    background-color: green;
-    border: 1px solid black;
+}
+
+.card img {
+    width: 100%;
 }
 
 .modal {
@@ -34,4 +55,11 @@ header {
     height: 50%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: #1b5b6e;
+}
+
+@media (min-width: 460px) {
+    #cards {
+        width: 460px;
+        margin: auto;
+    }
 }

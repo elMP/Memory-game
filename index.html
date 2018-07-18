@@ -3,21 +3,24 @@
     <head>
         <meta charset="UTF-8">
         <title>Memory game</title>
+        <link href="https://fonts.googleapis.com/css?family=Hind+Siliguri" rel="stylesheet"> 
         <link rel="stylesheet" href="styles.css">
         <script src="game.js" defer></script>
     </head>
     <body>
-        <header>
-            <h1>Memory game</h1>
-            <p>Find matching cards</p>
-            <button id="startGame">Start game</button>
-        </header>
-        <div id="cards"></div>
-        <div id="gameover" class="modal">
-            <p>Congratulations! You are win!</p>
-            <p>Whould you like to play another time?</p>
-            <button id="restart">Restart game</button>
-            <button id="closemodal">Close</button>
-        </div> 
+        <div class="container">
+            <header>
+                <h1>Memory game</h1>
+                <p>Find all matching pairs. Good luck!</p>
+                <button id="startGame">Start game</button>
+            </header>
+            <div id="cards"></div>
+            <div id="gameover" class="modal">
+                <p>Congratulations! You are win!</p>
+                <p>Whould you like to play another time?</p>
+                <button id="restart">Restart game</button>
+                <button id="closemodal">Close</button>
+            </div>
+        </div>
     </body>
 </html>
