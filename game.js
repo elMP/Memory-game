@@ -7,6 +7,7 @@ const modal = document.getElementById("gameover");
 let firstChoosedCard;
 let openPairs = 0;
 let count = 0;
+let movesCount;
 
 const backgroundImage = 'background';
 const images = [
@@ -37,6 +38,7 @@ function startNewGame() {
         cards.removeChild(cards.firstChild);
     }
     openPairs = 0;
+    movesCount = 0;
 
     let indexes = images.map(function(val, index) {
         return index;
@@ -82,6 +84,7 @@ cards.onclick = function(e) {
 
     
     if (firstChoosedCard) {
+            ++movesCount;
             if (firstChoosedCard == element) {
                 count--;
                 return;
@@ -95,8 +98,11 @@ cards.onclick = function(e) {
                     openPairs++;
                     console.log(openPairs, images.length);
                     if (openPairs == images.length) {
+                        let element = document.getElementsByClassName('moves')[0];
+                        console.log('Win' + movesCount + element);
+                        element.innerHTML = movesCount;
                         modal.style.display = "block";
-                        console.log('Win');
+                        
                     }
                 }
                 else {
