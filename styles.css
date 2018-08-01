@@ -47,19 +47,69 @@ header button {
 
 .modal {
     display: none; /* Hidden by default */
+    justify-content: space-around;    
+    flex-direction: column;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    left: 25%;
-    top: 25%;
-    width: 50%; /* Full width */
-    height: 50%; /* Full height */
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: #1b5b6e;
+    background-color: rgb(153, 217, 234);
+    text-align: center;
+}
+
+.header {
+    font-size: 30px;
+}
+
+.repeat {
+    display: flex;
+    flex-direction: column;
+}
+
+.stars {
+    display: flex;
+}
+
+@media (min-width: 320px) {
+    .stars {
+        width: 320px;
+        margin: auto;
+    }
 }
 
 @media (min-width: 460px) {
     #cards {
         width: 460px;
         margin: auto;
+    }
+    .modal {
+        width: 400px;
+        margin: auto;
+    }
+}
+
+@media (min-width: 400px) {
+    .repeat p {
+        width: 100%;
+    }
+    .repeat button {
+        width: 50%;
+    }
+    .repeat {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (min-height: 500px) {
+    .modal {
+        height: 500px;
+        box-shadow: 5px 5px 5px black;
     }
 }
