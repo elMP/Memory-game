@@ -3,12 +3,14 @@ const startGame = document.getElementById("startGame");
 const restartGame = document.getElementById("restart");
 const closemodal = document.getElementById("closemodal");
 const modal = document.getElementById("gameover");
+const timeNow = document.getElementsByClassName("time")[0];
 
 let firstChoosedCard;
 let openPairs = 0;
 let count = 0;
 let movesCount;
-
+let timer;
+let hours, minutes, seconds;
 const backgroundImage = 'background';
 const images = [
     'Chrysanthemum',
@@ -57,6 +59,30 @@ function startNewGame() {
         newCard.appendChild(newCardContent);
         cards.appendChild(newCard);
     });
+
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    //every second time++
+    timer = setInterval(function(){
+        if (seconds == 59) {
+            seconds = 0;
+            if (minutes == 59) {
+                minutes = 0;
+                ++hours;
+            }
+            else
+                ++minutes;
+        }
+        else {
+            ++seconds;
+        }
+        //console.log(seconds, ' ', seconds.length, ' ', (seconds < 10 ? '0' + seconds : seconds));
+        timeNow.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
+            (minutes < 10 ? '0' + minutes : minutes) + ':' + 
+            (seconds < 10 ? '0' + seconds : seconds);
+    }, 1000);
+    
 }
 
 function restart() {
@@ -98,9 +124,16 @@ cards.onclick = function(e) {
                     openPairs++;
                     console.log(openPairs, images.length);
                     if (openPairs == images.length) {
-                        let element = document.getElementsByClassName('moves')[0];
-                        console.log('Win' + movesCount + element);
-                        element.innerHTML = movesCount;
+                        let movesElement = document.getElementsByClassName('moves')[0];
+                        let timeElement = document.getElementsByClassName('finishTime')[0];
+                        /*console.log('Win' + (hours.length == 1 ? '0' + hours : hours) + ':' +
+                        (minutes.length == 1 ? '0' + minutes : minutes) + ':' + 
+                        (seconds.length == 1 ? '0' + seconds : seconds));*/
+                        clearInterval(timer);
+                        movesElement.innerHTML = movesCount;
+                        timeElement.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
+                            (minutes < 10 ? '0' + minutes : minutes) + ':' + 
+                            (seconds < 10 ? '0' + seconds : seconds);
                         modal.style.display = "block";
                         
                     }
