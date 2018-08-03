@@ -41,7 +41,8 @@ function startNewGame() {
     }
     openPairs = 0;
     movesCount = 0;
-
+    clearInterval(timer);
+    
     let indexes = images.map(function(val, index) {
         return index;
     });
