@@ -2,13 +2,13 @@
 
 It's a project for Udacity Frontend NanoDegree. It's build from scratch (Udacity starter code has not been used).
 
-##Running the game
+## Running the game
 
 Simply open this link for Github Pages: https://elmp.github.io/Memory-game/
 Press ` Start new game `
 
 
-##Game's rules
+## Game's rules
 
 You have 16 closed cards. 
 You open two cards (by click on it). 
