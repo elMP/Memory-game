@@ -48,7 +48,7 @@ function startNewGame() {
     });
     indexes = indexes.concat(indexes);
     shuffle(indexes);
-    console.log(indexes);
+    //console.log(indexes);
 
     indexes.forEach(function(index) {
         let newCard = document.createElement('div');
@@ -135,7 +135,7 @@ cards.onclick = function(e) {
                         timeElement.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
                             (minutes < 10 ? '0' + minutes : minutes) + ':' + 
                             (seconds < 10 ? '0' + seconds : seconds);
-                        modal.style.display = "block";
+                        modal.style.display = "flex";
                         
                     }
                 }
