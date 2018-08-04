@@ -94,6 +94,20 @@ function restart() {
 startGame.onclick = startNewGame;
 restartGame.onclick = restart;
 
+function fillStars(n) {
+    const star1 = document.getElementById('star1');
+    const star2 = document.getElementById('star2');
+    const star3 = document.getElementById('star3');
+    let stars = [star1, star2, star3];
+
+    for (let i = 0; i < n; ++i) {
+        stars[i].src = "images/star-fill.jpg";
+    }
+    for (let i = n; i < stars.length; ++i) {
+        stars[i].src = "images/star.jpg";
+    }
+}
+
 cards.onclick = function(e) {
     e.preventDefault();
 
@@ -127,6 +141,7 @@ cards.onclick = function(e) {
                     if (openPairs == images.length) {
                         let movesElement = document.getElementsByClassName('moves')[0];
                         let timeElement = document.getElementsByClassName('finishTime')[0];
+                        const message = document.getElementsByClassName('message')[0];
                         /*console.log('Win' + (hours.length == 1 ? '0' + hours : hours) + ':' +
                         (minutes.length == 1 ? '0' + minutes : minutes) + ':' + 
                         (seconds.length == 1 ? '0' + seconds : seconds));*/
@@ -135,6 +150,24 @@ cards.onclick = function(e) {
                         timeElement.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
                             (minutes < 10 ? '0' + minutes : minutes) + ':' + 
                             (seconds < 10 ? '0' + seconds : seconds);
+                        if (minutes < 1)
+                            if (movesCount < 20) {
+                                message.innerHTML = "Excellent job!";
+                                fillStars(3);
+                            }
+                            else {
+                                message.innerHTML = "Good job!";
+                                fillStars(2);
+                            }
+                        else
+                            if (movesCount < 20) {
+                                message.innerHTML = "Good job!";
+                                fillStars(2);
+                            }
+                            else {
+                                message.innerHTML = "Not bad!";
+                                fillStars(1);
+                            }
                         modal.style.display = "flex";
                         
                     }
