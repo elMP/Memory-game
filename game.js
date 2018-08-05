@@ -50,6 +50,47 @@ function fillStars(n) {
     }
 }
 
+//that to do then player won
+function displayWin() {
+    let movesElement = document.getElementsByClassName('moves')[0];
+    let timeElement = document.getElementsByClassName('finishTime')[0];
+    const message = document.getElementsByClassName('message')[0];
+
+    //stop time
+    clearInterval(timer);
+    //set moves count
+    movesElement.innerHTML = movesCount;
+    //set time, if only one digit in second, minite or hour - add leading 0
+    timeElement.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
+        (minutes < 10 ? '0' + minutes : minutes) + ':' + 
+        (seconds < 10 ? '0' + seconds : seconds);
+
+    //3 stars if the player did less then 20 moves and the game lasted less then 1 minute
+    //2 stars if the player did more then 20 moves but the game lasted less then 1 minute
+    //2 stars if the player did less then 20 moves but the game lasted more then 1 minute
+    //1 stars if the player did more then 20 moves and the game lasted more then 1 minute
+    if (minutes < 1)
+        if (movesCount < 20) {
+            message.innerHTML = "Excellent job!";
+            fillStars(3);
+        }
+        else {
+            message.innerHTML = "Good job!";
+            fillStars(2);
+        }
+    else
+        if (movesCount < 20) {
+            message.innerHTML = "Good job!";
+            fillStars(2);
+        }
+        else {
+            message.innerHTML = "Not bad!";
+            fillStars(1);
+        }
+    //dispaly modal window
+    modal.style.display = "flex";
+}
+
 function startNewGame() {
     //delete prevous cards
     while (cards.firstChild) {
@@ -154,38 +195,9 @@ cards.onclick = function(e) {
 
                     openPairs++;
                     console.log(openPairs, images.length);
+                    //if all pairs is open - it a win
                     if (openPairs == images.length) {
-                        let movesElement = document.getElementsByClassName('moves')[0];
-                        let timeElement = document.getElementsByClassName('finishTime')[0];
-                        const message = document.getElementsByClassName('message')[0];
-                        /*console.log('Win' + (hours.length == 1 ? '0' + hours : hours) + ':' +
-                        (minutes.length == 1 ? '0' + minutes : minutes) + ':' + 
-                        (seconds.length == 1 ? '0' + seconds : seconds));*/
-                        clearInterval(timer);
-                        movesElement.innerHTML = movesCount;
-                        timeElement.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
-                            (minutes < 10 ? '0' + minutes : minutes) + ':' + 
-                            (seconds < 10 ? '0' + seconds : seconds);
-                        if (minutes < 1)
-                            if (movesCount < 20) {
-                                message.innerHTML = "Excellent job!";
-                                fillStars(3);
-                            }
-                            else {
-                                message.innerHTML = "Good job!";
-                                fillStars(2);
-                            }
-                        else
-                            if (movesCount < 20) {
-                                message.innerHTML = "Good job!";
-                                fillStars(2);
-                            }
-                            else {
-                                message.innerHTML = "Not bad!";
-                                fillStars(1);
-                            }
-                        modal.style.display = "flex";
-                        
+                        displayWin();                        
                     }
                 }
                 else {
