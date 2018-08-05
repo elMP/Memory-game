@@ -28,6 +28,7 @@ header button {
     margin: 10px 0;
 }
 
+/* styles for game's cards */
 #cards {    
     display: flex;
     flex-direction: row;
