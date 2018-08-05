@@ -12,6 +12,7 @@ let movesCount;
 let timer;
 let hours, minutes, seconds;
 const backgroundImage = 'background';
+//image's array
 const images = [
     'Chrysanthemum',
     'Desert',
@@ -23,14 +24,29 @@ const images = [
     'Tulips'
 ];
 
+//random shuffle
 function shuffle(array) {
     for (let i = array.length - 1; i >= 0; i--) {
         const randomPosition = Math.floor(Math.random() * i);
-        //console.log(randomPosition);
 
         const temp = array[randomPosition];
         array[randomPosition] = array[i];
         array[i] = temp;
+    }
+}
+
+//how many stars to fill
+function fillStars(n) {
+    const star1 = document.getElementById('star1');
+    const star2 = document.getElementById('star2');
+    const star3 = document.getElementById('star3');
+    let stars = [star1, star2, star3];
+
+    for (let i = 0; i < n; ++i) {
+        stars[i].src = "images/star-fill.jpg";
+    }
+    for (let i = n; i < stars.length; ++i) {
+        stars[i].src = "images/star.jpg";
     }
 }
 
@@ -39,28 +55,32 @@ function startNewGame() {
     while (cards.firstChild) {
         cards.removeChild(cards.firstChild);
     }
+    //delete prevuos game stats
     openPairs = 0;
     movesCount = 0;
     clearInterval(timer);
     
+    //shuffle images - more precisely their indexes
     let indexes = images.map(function(val, index) {
         return index;
     });
     indexes = indexes.concat(indexes);
     shuffle(indexes);
-    //console.log(indexes);
 
+    //create game elements
     indexes.forEach(function(index) {
         let newCard = document.createElement('div');
-        let newCardContent = document.createElement('img');
-        //const imageName = images[0];
-        newCardContent.setAttribute('src', 'images/' + backgroundImage + '.jpg');
         newCard.setAttribute('class', 'card');
+        
+        let newCardContent = document.createElement('img');
+        newCardContent.setAttribute('src', 'images/' + backgroundImage + '.jpg');        
         newCardContent.setAttribute('data-id', index);
+
         newCard.appendChild(newCardContent);
         cards.appendChild(newCard);
     });
 
+    //set timer
     seconds = 0;
     minutes = 0;
     hours = 0;
@@ -78,7 +98,6 @@ function startNewGame() {
         else {
             ++seconds;
         }
-        //console.log(seconds, ' ', seconds.length, ' ', (seconds < 10 ? '0' + seconds : seconds));
         timeNow.innerHTML = (hours < 10 ? '0' + hours : hours) + ':' +
             (minutes < 10 ? '0' + minutes : minutes) + ':' + 
             (seconds < 10 ? '0' + seconds : seconds);
@@ -91,45 +110,42 @@ function restart() {
     startNewGame();
 }
 
+//functions for buttons
 startGame.onclick = startNewGame;
 restartGame.onclick = restart;
-
-function fillStars(n) {
-    const star1 = document.getElementById('star1');
-    const star2 = document.getElementById('star2');
-    const star3 = document.getElementById('star3');
-    let stars = [star1, star2, star3];
-
-    for (let i = 0; i < n; ++i) {
-        stars[i].src = "images/star-fill.jpg";
-    }
-    for (let i = n; i < stars.length; ++i) {
-        stars[i].src = "images/star.jpg";
-    }
+closemodal.onclick = function() {
+    modal.style.display = "none";
 }
 
+//if we clicked on a card - that to do
 cards.onclick = function(e) {
     e.preventDefault();
 
+    //if already two cards is open - we don't open another card
     if (count == 2)
         return;
 
+    //if this card already found and open - we don't need to do anything
     let element = e.target;
     if (element.getAttribute('data-status') == 'found')
         return;
     
+    //open the card
     let number = element.getAttribute('data-id');
     const imageName = images[number];
     element.setAttribute('src', 'images/' + imageName + '.jpg');  
     count++;
 
-    
+    //if it's a second card - match first and second cards
     if (firstChoosedCard) {
-            ++movesCount;
+            //if first and second clicked cards is the same - don't do anything
             if (firstChoosedCard == element) {
                 count--;
                 return;
             }
+
+            //one move - it's two open cards
+            ++movesCount;
 
             setTimeout(function() {
                 if (firstChoosedCard.getAttribute('data-id') == number) {
@@ -181,12 +197,10 @@ cards.onclick = function(e) {
                 count = 0;
             }, 1000);
     }
+    //if it's a fitst card - remember it
     else {
         firstChoosedCard = element;
     }
 
 }
 
-closemodal.onclick = function() {
-    modal.style.display = "none";
-}
