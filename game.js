@@ -188,28 +188,35 @@ cards.onclick = function(e) {
             //one move - it's two open cards
             ++movesCount;
 
-            setTimeout(function() {
-                if (firstChoosedCard.getAttribute('data-id') == number) {
-                    element.setAttribute('data-status', 'found');
-                    firstChoosedCard.setAttribute('data-status', 'found');
+            //if first and second cards have the same image
+            //leave them open and increment count of open pairs
+            if (firstChoosedCard.getAttribute('data-id') == number) {
+                element.setAttribute('data-status', 'found');
+                firstChoosedCard.setAttribute('data-status', 'found');
 
-                    openPairs++;
-                    console.log(openPairs, images.length);
-                    //if all pairs is open - it a win
-                    if (openPairs == images.length) {
-                        displayWin();                        
-                    }
+                openPairs++;
+                //if all pairs is open - it's a win
+                if (openPairs == images.length) {
+                    displayWin();                        
                 }
-                else {
-                    //const imageName = images[0];
-                    element.setAttribute('src', 'images/' + backgroundImage + '.jpg');
-                    firstChoosedCard.setAttribute('src', 'images/' + backgroundImage + '.jpg');
-                }
+
                 firstChoosedCard = undefined;
                 count = 0;
-            }, 1000);
+            }
+            //if card's images is different - pause game for a second
+            //so the player can see the images on open cards
+            else {
+                setTimeout(function() {
+                    //close cards
+                    element.setAttribute('src', 'images/' + backgroundImage + '.jpg');
+                    firstChoosedCard.setAttribute('src', 'images/' + backgroundImage + '.jpg');
+                    
+                    firstChoosedCard = undefined;
+                    count = 0;
+                }, 1000);
+            }
     }
-    //if it's a fitst card - remember it
+    //if it's a first card - remember it
     else {
         firstChoosedCard = element;
     }
