@@ -52,6 +52,8 @@ header button {
     justify-content: space-around;    
     flex-direction: column;
     position: fixed;
+    min-width: 300px;
+    max-width: 500px;
     z-index: 1;
     left: 0;
     top: 0;
@@ -74,18 +76,17 @@ header button {
     flex-direction: column;
 }
 
+.repeat button{
+    min-height: 40px;
+    margin-top: 10px;
+}
+
 .stars {
     display: flex;
+    justify-content: center;
 }
 
 /* addaptive styles */
-@media (min-width: 320px) {
-    .stars {
-        width: 320px;
-        margin: auto;
-    }
-}
-
 @media (min-width: 400px) {
     .repeat p {
         width: 100%;
@@ -102,10 +103,6 @@ header button {
 @media (min-width: 460px) {
     #cards {
         width: 460px;
-        margin: auto;
-    }
-    .modal {
-        width: 400px;
         margin: auto;
     }
 }
