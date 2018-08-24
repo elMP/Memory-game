@@ -144,6 +144,8 @@ function startNewGame() {
             (seconds < 10 ? '0' + seconds : seconds);
     }, 1000);
     
+    let movesElement = document.getElementsByClassName('movesdone')[0];
+    movesElement.innerHTML = movesCount;
 }
 
 function restart() {
@@ -187,7 +189,9 @@ cards.onclick = function(e) {
 
             //one move - it's two open cards
             ++movesCount;
-
+            let movesElement = document.getElementsByClassName('movesdone')[0];
+            movesElement.innerHTML = movesCount;
+            
             //if first and second cards have the same image
             //leave them open and increment count of open pairs
             if (firstChoosedCard.getAttribute('data-id') == number) {
