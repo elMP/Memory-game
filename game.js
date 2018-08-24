@@ -36,18 +36,46 @@ function shuffle(array) {
 }
 
 //how many stars to fill
-function fillStars(n) {
-    const star1 = document.getElementById('star1');
-    const star2 = document.getElementById('star2');
-    const star3 = document.getElementById('star3');
-    let stars = [star1, star2, star3];
+function fillStars(n, current) {
+    let stars = [];
+    let parent;
+    if (current)
+        parent = document.getElementById('currentStars');
+    else
+        parent = document.getElementById('stars');
+
+    let elements = parent.children;
+    stars = [].map.call(elements, function(element) {
+        return element;
+    })
 
     for (let i = 0; i < n; ++i) {
-        stars[i].src = "images/star-fill.jpg";
+        stars[i].src = "images/star-fill.png";
     }
     for (let i = n; i < stars.length; ++i) {
-        stars[i].src = "images/star.jpg";
+        stars[i].src = "images/star.png";
     }
+}
+
+function calculateStarRating() {
+    //how many moves lasts for win in best case
+    let movesCountInBestCase = movesCount + images.length - openPairs;
+    let stars = 0;
+    if (minutes < 1)
+        if (movesCountInBestCase < 20) {
+            stars = 3;
+        }
+        else {
+            stars = 2;
+        }
+    else
+        if (movesCount < 20) {
+            stars = 2;
+        }
+        else {
+            stars = 1;
+        }
+    fillStars(stars, 1);
 }
 
 //that to do then player won
@@ -99,6 +127,7 @@ function startNewGame() {
     //delete prevuos game stats
     openPairs = 0;
     movesCount = 0;
+    fillStars(3, 1);
     clearInterval(timer);
     
     //shuffle images - more precisely their indexes
@@ -219,6 +248,9 @@ cards.onclick = function(e) {
                     count = 0;
                 }, 1000);
             }
+
+            //calculate star rating
+            calculateStarRating();
     }
     //if it's a first card - remember it
     else {
