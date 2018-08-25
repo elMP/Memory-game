@@ -14,13 +14,15 @@
                 <h1>Memory game</h1>
                 <p>Find all matching pairs. Good luck!</p>
                 <button id="startGame">Start new game</button>
-                <div id="currentStars">
-                    <img width=20px height=20px class="star1" src="images/star-fill.png">
-                    <img width=20px height=20px class="star2" src="images/star-fill.png">
-                    <img width=20px height=20px class="star3" src="images/star-fill.png">
+                <div class="rating-and-moves">
+                    <div id="currentStars">
+                        <img width=20px height=20px class="star1" src="images/star-fill.png">
+                        <img width=20px height=20px class="star2" src="images/star-fill.png">
+                        <img width=20px height=20px class="star3" src="images/star-fill.png">
+                    </div>
+                    <p>Moves: <span class="movesdone">0</span></p>
                 </div>
-                <p>Moves: <span class="movesdone">0</span></p>
-                <p class="time">00:00:00</p>
+                <p>Time: <span class="time">00:00:00</span></p>
             </header>
             <div id="cards"></div>
             <div id="gameover" class="modal">

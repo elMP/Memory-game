@@ -14,6 +14,7 @@ body {
 header {
     text-align: center;
     margin: 10px 0;
+    width: 100%;
 }
 
 header h1 {
@@ -26,6 +27,11 @@ header button {
     background-image: linear-gradient(white, gray);
     outline: black 1px solid;
     margin: 10px 0;
+}
+
+header .rating-and-moves {
+    display: flex;
+    justify-content: space-around;
 }
 
 /* styles for game's cards */
@@ -111,5 +117,12 @@ header button {
     .modal {
         height: 500px;
         box-shadow: 5px 5px 5px black;
+    }
+}
+
+@media (min-width: 500px) {
+    header {
+        width: 500px;
+        margin: auto;
     }
 }
