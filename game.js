@@ -193,6 +193,10 @@ closemodal.onclick = function() {
 cards.onclick = function(e) {
     e.preventDefault();
 
+    //if target element is not an image - don't do anything
+    if (e.target.tagName != 'IMG')
+        return;
+
     //if already two cards is open - we don't open another card
     if (count == 2)
         return;
